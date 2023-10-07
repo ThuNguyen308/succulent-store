@@ -1,0 +1,34 @@
+.search-input {
+    width: 50%;
+    min-width: 200px;
+}
+
+.group-btns {
+    display: flex;
+    gap: 4px;
+
+    svg {
+        margin-right: 4px;
+        color: #fff;
+    }
+}
+
+.scrollable--without-scrollbar {
+    overflow-x: auto;
+    
+}
+
+.scrollable {
+    overflow-x: auto;
+}
+
+.table-width {
+    width: 830px;
+}
+
+@media only screen and (max-width: 576px) {
+    .search-input {
+        width: 100%;
+        margin-bottom: 12px
+    }
+}

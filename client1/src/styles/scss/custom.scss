@@ -1,0 +1,14 @@
+// @import "../../../node_modules/bootstrap/scss/functions";
+// @import "../../../node_modules/bootstrap/scss/variables";
+$primary: #407e6f;
+$btn-border-radius : 0;
+.btn-primary {
+    border: 1px solid $primary;
+}
+
+.btn-primary:hover {
+    background-color: #fff !important;
+    color: $primary !important
+}
+// @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../../node_modules/bootstrap/scss/bootstrap";

@@ -1,0 +1,155 @@
+
+:root {
+    --primary: #407e6f;
+    --text-color: #252a2b;
+    --border-color: #eae4e8;
+    --transition: all 0.3s ease-in-out;
+    --main-header-inner-height: 60px;
+    --nav-height: 50px;
+    --shop-color-bg: #f5f3ea;
+      --shop-color-main: #407e6f;
+      --shop-color-text: #252a2b;
+      --shop-color-title: #333333;
+      --shop-color-hover: #dba36f;
+      --shop-color-button: #c29e6b;
+      --shop-color-border: #eae4e8;
+      --home-category-bg-1: #faf1ff;
+      --home-category-bg-2: #faf4eb;
+      --home-category-bg-3: #f4e6e5;
+      --home-category-bg-4: #e6f2f4;
+      --home-category-bg-5: #fff6f6;
+      --home-coupon-bg: #ffffff;
+      --home-coupon-light: #f1c150;
+      --home-coupon-border: #f8d0d3;
+      --home-coupon-text: #333333;
+      --home-collection1-bg: #89bba8;
+      --home-collection1-icon: #bd6f6f;
+      --home-collection1-color-text: #ffffff;
+      --home-categorize-bg: #89bba8;
+      --home-categorize-color: #ffffff;
+      --home-collection2-bg: #ffa600;
+      --home-collection2-title: #ff0000;
+      --home-collection3-bg: #e9dabe;
+      --footer-bg-color-1: #e0f1e9;
+      --footer-bg-color-2: #afccbf;
+      --footer-bg-color-copyright: #f2f8fd;
+      --footer-color-title: #333333;
+      --footer-color-text: #333333;
+      --footer-color-hover: #f1c150;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-color);
+    background-color: var(--shop-color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  input {
+    outline: none;
+    border: none;
+  }
+  
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  // /* Firefox */
+  // input[type=number] {
+  //   -moz-appearance: textfield;
+  // }
+  
+  a {
+    text-decoration: none;
+    color: var(--text-color);
+  }
+  
+  a:hover {
+    color: var(--primary)
+  }
+  
+  button {
+    border: none;
+  }
+  
+  .btn-default {
+    border: 2px solid var(--border-color);
+  }
+  
+  // /* Header navbar */
+  // header {
+  //   background-color: var(--shop-color-main)
+  // }
+  // nav {
+  //   box-shadow: 0 1px 2px 0 rgba(0,0,0,.12);
+  // }
+  
+  // .nav-link {
+  //   text-transform: uppercase;
+  // }
+  
+  // .navbar-nav .nav-link.active,
+  // .nav-link:hover {
+  //   color: var(--primary)
+  // }
+  
+  // .dropdown-menu[data-bs-popper] {
+  //   left: 0;
+  // }
+  
+  /* Footer */
+  footer {
+    background-color: var(--footer-bg-color-2)
+  }
+  
+  footer .social-icon-list a {
+    background-color: var(--text-color);
+  }
+  
+  footer .social-icon-list a:hover {
+    background-color: var(--primary)
+  }
+  
+  /* Page not found */
+  .page-not-found {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    position: relative;
+  }
+  
+  .page-not-found::after {
+    content: '404';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 300px;
+    font-weight: bold;
+    opacity: 0.05;
+    z-index: -1;
+  }
+  
+  .page-not-found .wrapper {
+    max-width: 800px
+  }
+  

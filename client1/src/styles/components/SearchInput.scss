@@ -1,0 +1,83 @@
+.search-container {
+    width: 100%;
+    position: relative;
+}
+
+.search-result {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 1px 1px 3px #ccc;
+}
+
+.search-form {
+    height: 40px;
+    position: relative;
+    input {
+        height: 100%;;
+        width: 100%;
+        padding-left: 12px;
+        border-radius: 4px;
+        background-color: #fff;
+    }
+    button {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        padding: 0 8px;
+        height: calc(100% - 8px);
+        border-radius: 4px;
+        background-color: var(--shop-color-main);
+        color: #fff;
+    }
+}
+
+.result-item {
+    padding: 0 20px;
+}
+
+.result-item:hover {
+    background-color: rgba(0, 0, 0, 0.05)
+}
+
+.result-item:not(:last-child) a {
+    border-bottom: 1px dotted #ddd
+}
+
+.result-item .result-item-link {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 13px;
+    text-transform: none;
+}
+
+.result-item:hover .name {
+    color: var(--hover-text-color)
+}
+
+.result-item .name {
+    display: block;
+}
+
+.result-item .price {
+    display: block;
+}
+
+.result-item .img {
+    width: 40px;
+    object-fit: contain;
+}
+
+.see-all-btn {
+    padding: 12px;
+    border-top: 1px dotted #ddd;
+    width: 100%;
+}
+
+.see-all-btn:hover {
+    color: var(--shop-color-hover);
+}

@@ -1,0 +1,51 @@
+.product-card {
+    text-align: center;
+
+    &:hover {
+        img {
+            transform: scale(1.1);
+        }
+
+        button {
+            visibility: visible;
+        }
+    }
+    
+    .img-warpper {
+        width: 200px;
+        height: 275px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: 0.2s linear;
+        }
+    }
+
+    .body {
+        padding: 8px 32px;
+
+        .name {
+            font-weight: bold;
+            letter-spacing: 1px
+        }
+
+        .quantity {
+            font-size: smaller;
+        }
+    }
+
+    button {
+        visibility: hidden;
+    }
+
+    @media only screen and (max-width: 576px) {
+        button {
+            visibility: visible;
+        }
+    }
+}
