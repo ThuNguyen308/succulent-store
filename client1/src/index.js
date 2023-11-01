@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/scss/custom.scss';
-import './styles/main.scss';
-import App from './App';
-import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles/overwriteBootstrap/custom.scss";
+import "./styles/main.scss";
+import App from "./App";
+import "react-toastify/dist/ReactToastify.css";
 
-import store from './redux/store'
-import { SearchProvider } from './context/search';
-import ErrorBoundary from './components/ErrorBoudary/ErrorBoundary';
+import store from "./redux/store";
+import { SearchProvider } from "./context/search";
+import ErrorBoundary from "./components/ErrorBoudary/ErrorBoundary";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ErrorBoundary>
     <Provider store={store}>

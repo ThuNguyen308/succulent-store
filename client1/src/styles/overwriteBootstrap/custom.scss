@@ -1,5 +1,3 @@
-// @import "../../../node_modules/bootstrap/scss/functions";
-// @import "../../../node_modules/bootstrap/scss/variables";
 $primary: #407e6f;
 $btn-border-radius : 0;
 .btn-primary {
@@ -10,5 +8,4 @@ $btn-border-radius : 0;
     background-color: #fff !important;
     color: $primary !important
 }
-// @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "../../../node_modules/bootstrap/scss/bootstrap";
