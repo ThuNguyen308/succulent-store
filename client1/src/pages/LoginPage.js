@@ -16,7 +16,6 @@ import {
 import { login, loginSuccess, loginError } from "../redux/actions/user";
 
 export default function Login() {
-  console.log("login");
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
@@ -51,10 +50,10 @@ export default function Login() {
           }
         );
         if (res?.data?.success) {
-          const { name, email, address, phone, role } = res.data.user;
+          const { _id, name, email, address, phone, role } = res.data.user;
           localStorage.setItem("user", JSON.stringify(res.data.user));
           localStorage.setItem("token", res.data.token);
-          dispatch(loginSuccess({ name, email, address, phone, role }));
+          dispatch(loginSuccess({ _id, name, email, address, phone, role }));
           toast.success("Login successful");
         } else {
           dispatch(loginError());

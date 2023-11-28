@@ -9,7 +9,7 @@ import {
   productPhotoController,
   deleteProductController,
   updateProductController,
-  productFiltersController,
+  filterProductsController,
   productCountController,
   productListController,
   searchProductWithLimitController,
@@ -20,7 +20,8 @@ import {
   braintreePaymentController,
   getOrdersController,
   getAllOrderController,
-  updateOrderStatusController
+  updateOrderStatusController,
+  paymentLater,
 } from "../controllers/productController.js";
 import formidable from "express-formidable";
 
@@ -57,7 +58,10 @@ router.patch(
 router.get("/get-all-product", getAllProductController);
 
 //GET PAGINATED PRODUCTS
-router.post("/get-paginated-products/:page/:limit", getPaginatedProductController);
+router.post(
+  "/get-paginated-products/:page/:limit",
+  getPaginatedProductController
+);
 
 //GET SINGLE PRODUCT
 router.get("/get-single-product/:slug", getSingleProductController);
@@ -69,7 +73,7 @@ router.get("/product-photo/:pid", productPhotoController);
 router.delete("/delete-product/:pid", deleteProductController);
 
 //FILTER PRODUCT
-router.post("/product-filters", productFiltersController);
+router.post("/product-filters", filterProductsController);
 
 //PRODUCT COUNT
 router.get("/product-count", productCountController);
@@ -91,19 +95,26 @@ router.get("/product-category/:slug", productCategoryController);
 
 //PAYMENTS ROUTES
 //token
-router.get("/braintree/token", braintreeTokenController)
+router.get("/braintree/token", braintreeTokenController);
+
+//payment later
+router.post("/payment-later", requireSignIn, paymentLater);
 
 //payments
-router.post("/braintree/payment", requireSignIn, braintreePaymentController)
+router.post("/braintree/payment", requireSignIn, braintreePaymentController);
 
 //GET ORDERS
-router.get("/orders", requireSignIn, getOrdersController)
+router.get("/orders", requireSignIn, getOrdersController);
 
 //GET ALL ORDER
-router.get("/all-order", requireSignIn, isAdmin, getAllOrderController)
+router.get("/all-order", requireSignIn, isAdmin, getAllOrderController);
 
 //UPADTE ORDER'S STATUS
-router.put("/update-order-status/:orderId", requireSignIn, isAdmin, updateOrderStatusController)
-
+router.put(
+  "/update-order-status/:orderId",
+  requireSignIn,
+  isAdmin,
+  updateOrderStatusController
+);
 
 export default router;

@@ -1,8 +1,9 @@
 import userModel from "../models/userModel.js";
-import orderModel from "../models/orderModel.js"
+import orderModel from "../models/orderModel.js";
 
 import { hashPassword, comparePassword } from "../helpers/authHelper.js";
 import JWT from "jsonwebtoken";
+import fs from "fs";
 
 export const registerController = async (req, res) => {
   try {
@@ -93,6 +94,7 @@ export const loginController = async (req, res) => {
       success: true,
       message: "Login successfully",
       user: {
+        _id: user._id,
         name: user.name,
         email: user.email,
         phone: user.phone,
@@ -126,7 +128,7 @@ export const forgotPasswordController = async (req, res) => {
       return res.send({ message: "Answer is Require" });
     }
     //check user
-    const user = await userModel.findOne({ email});
+    const user = await userModel.findOne({ email });
     if (!user) {
       return res.status(404).send({
         success: false,
@@ -157,19 +159,47 @@ export const forgotPasswordController = async (req, res) => {
   }
 };
 
-//test controller
-export const testController = (req, res) => {
-  res.send("protected route");
+//get avatar
+export const getAvatarController = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.params.uid).select("photo");
+    console.log("user", user);
+    console.log(req.params.uid);
+    if (user.photo.data) {
+      res.set("Content-Type", user.photo.contentType);
+      return res.status(200).send(user.photo.data);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error in Getting photo",
+    });
+  }
 };
 
 //update Profile
 export const updateProfileController = async (req, res) => {
   try {
-    const { name, email, phone, address } = req.body;
+    console.log("updated User");
+    const { name, email, phone, address, user } = req.fields;
+    const { photo } = req.files;
     const { _id } = req.user;
+    const avatar = {};
+    if (photo) {
+      avatar.data = fs.readFileSync(photo.path);
+      avatar.contentType = photo.type;
+    }
     const updatedUser = await userModel.findByIdAndUpdate(
       { _id },
-      { name: name, email: email, phone: phone, address: address },
+      {
+        name: name,
+        email: email,
+        phone: phone,
+        address: address,
+        photo: avatar,
+      },
       { new: true }
     );
     res.status(200).send({
@@ -186,4 +216,3 @@ export const updateProfileController = async (req, res) => {
     });
   }
 };
-

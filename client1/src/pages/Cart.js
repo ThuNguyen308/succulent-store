@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import CartItem from "../components/CartItem";
 import format from "../helpers/format";
 import { useNavigate } from "react-router-dom";

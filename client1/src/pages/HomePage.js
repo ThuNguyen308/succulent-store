@@ -5,6 +5,7 @@ import { Checkbox, Pagination, Radio } from "antd";
 import ProductCard from "../components/ProductCard";
 import { prices } from "../components/Price";
 import { fetchAllProduct } from "../services/ProductSevice";
+import format from "../helpers/format";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
@@ -14,20 +15,8 @@ export default function HomePage() {
   const [radioPrice, setRadioPrice] = useState([]);
 
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState("");
+  const [total, setTotal] = useState(0);
   const [limit, setLimit] = useState(8);
-
-  const getProductsPerPage = async () => {
-    try {
-      const res = await fetchAllProduct(page, limit);
-      if (res) {
-        setProducts(res.products);
-        setTotal(res.total);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const getAllCategories = async () => {
     try {
@@ -42,19 +31,15 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    getProductsPerPage();
     getAllCategories();
   }, []);
 
   useEffect(() => {
-    getProductsPerPage();
-  }, [page]);
-
-  useEffect(() => {
     filterProduct();
-  }, [checkedCategories, radioPrice]);
+  }, [page, checkedCategories, radioPrice]);
 
   const handleFilterByCategory = (value, id) => {
+    setPage(1);
     let all = [...checkedCategories];
     if (value) {
       all.push(id);
@@ -66,76 +51,87 @@ export default function HomePage() {
 
   const filterProduct = async (req, res) => {
     try {
-      console.log(checkedCategories, radioPrice);
+      // console.log(checkedCategories, radioPrice);
       const { data } = await axios.post(
         process.env.REACT_APP_API + "api/v1/product/product-filters",
-        { checkedCategories, radioPrice }
+        { checkedCategories, radioPrice, page, limit }
       );
       setProducts(data?.products);
+      setTotal(data.total);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <>
-      <div className="row">
-        <div className="col-md-3">
-          <div className="d-flex flex-column mb-3">
-            <h3>Category</h3>
-            {categories?.map((c) => (
-              <Checkbox
-                key={c._id}
-                onChange={(e) =>
-                  handleFilterByCategory(e.target.checked, c._id)
-                }
-              >
-                {c.name}
-              </Checkbox>
-            ))}
-          </div>
-          <div className="d-flex flex-column mb-3">
-            <h3>Price</h3>
-            <Radio.Group onChange={(e) => setRadioPrice(e.target.value)}>
-              {prices?.map((price) => (
-                <div key={price._id}>
-                  <Radio value={price.array}>{price.name}</Radio>
-                </div>
-              ))}
-            </Radio.Group>
-          </div>
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              window.location.reload();
+    <div className="row">
+      <div className="col-md-3">
+        <div className="d-flex flex-column mb-3">
+          <h3>Category</h3>
+          {categories?.map((c) => (
+            <Checkbox
+              key={c._id}
+              onChange={(e) => handleFilterByCategory(e.target.checked, c._id)}
+            >
+              {c.name}
+            </Checkbox>
+          ))}
+        </div>
+        <div className="d-flex flex-column mb-3">
+          <h3>Price</h3>
+          <Radio.Group
+            onChange={(e) => {
+              setPage(1);
+              setRadioPrice(e.target.value);
             }}
           >
-            Reset
-          </button>
+            {prices?.map((price) => (
+              <div key={price._id}>
+                <Radio value={price.array}>{`${format.formatPrice(
+                  price.array[0]
+                )}  -  ${
+                  format.formatPrice(price.array[1])
+                    ? format.formatPrice(price.array[1])
+                    : "more"
+                }`}</Radio>
+              </div>
+            ))}
+          </Radio.Group>
         </div>
-        <div className="col-md-9">
-          <div className="row g-1">
-            {products.length > 0 ? (
-              products.map((product) => (
-                <div key={product._id} className="col-lg-3 col-md-4 col-6">
-                  <ProductCard key={product._id} product={product} />
-                </div>
-              ))
-            ) : (
-              <div>No product found</div>
-            )}
-          </div>
-          <Pagination
-            defaultCurrent={1}
-            current={page}
-            pageSize={limit}
-            total={total}
-            onChange={(page) => {
-              setPage(page);
-            }}
-          />
-        </div>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            window.location.reload();
+          }}
+        >
+          Reset
+        </button>
       </div>
-    </>
+      <div className="col-md-9">
+        <div className="row g-1">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <div
+                key={product._id}
+                className="col-xl-3 col-lg-4 col-md-6 col-6"
+              >
+                <ProductCard key={product._id} product={product} />
+              </div>
+            ))
+          ) : (
+            <div>No product found</div>
+          )}
+        </div>
+        <Pagination
+          defaultCurrent={1}
+          current={page}
+          pageSize={limit}
+          total={total}
+          onChange={(page) => {
+            setPage(page);
+          }}
+        />
+      </div>
+    </div>
   );
 }
