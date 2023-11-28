@@ -6,6 +6,7 @@ import ProductCard from "../components/ProductCard";
 import { prices } from "../components/Price";
 import { fetchAllProduct } from "../services/ProductSevice";
 import format from "../helpers/format";
+import { toast } from "react-toastify";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
@@ -26,7 +27,7 @@ export default function HomePage() {
       setCategories(data.category);
     } catch (error) {
       console.log(error);
-      alert("Something Went Wrong");
+      toast.error("Fetch categories failed");
     }
   };
 

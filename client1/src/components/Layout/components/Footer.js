@@ -7,10 +7,30 @@ import {
   faGoogle,
   faSquareFacebook,
 } from "@fortawesome/free-brands-svg-icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Footer() {
+  const [categories, setCategories] = useState([]);
+
+  const getAllCategories = async () => {
+    try {
+      const { data } = await axios.get(
+        process.env.REACT_APP_API + "api/v1/category/get-all-category"
+      );
+      setCategories(data.category);
+    } catch (error) {
+      console.log(error);
+      toast.error("Fetch categories failed");
+    }
+  };
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+
   return (
     <footer className="pt-5 pb-4">
       <div className="container text-center text-md-start">
@@ -18,58 +38,50 @@ export default function Footer() {
           <div className="col-md-6 col-lg-4 col-xl-3 mx-auto mt-3">
             <h5 className="text-uppercase fw-bold mb-4">Watch store</h5>
             <p>
-              You can see all the famous and best quality watches in our store,
-              it is our pleasure to serve you.
+              Sen đá xinh cung cấp sen đá sỉ và lẻ tại khu vực TPHCM. Với kinh
+              nghiệm hoạt động hơn 3 năm tại TPHCM, vườn có đầy đủ kinh nghiệm
+              để chọn lựa các loại sen đá phù hợp nhất có thể sống được tại nơi
+              có khí hậu nóng như Sài Gòn.
             </p>
           </div>
           <div className="col-md-6 col-lg-4 col-xl-2 mx-auto mt-3">
             <h5 className="text-uppercase mb-4 fw-bold">Categories</h5>
-            <p>
-              <Link to="/men" style={{ textDecoration: "none" }}>
-                Men
-              </Link>
-            </p>
-            <p>
-              <Link to="/men" style={{ textDecoration: "none" }}>
-                Women
-              </Link>
-            </p>
-            <p>
-              <Link to="/men" style={{ textDecoration: "none" }}>
-                Boys
-              </Link>
-            </p>
-            <p>
-              <Link to="/men" style={{ textDecoration: "none" }}>
-                Girls
-              </Link>
-            </p>
+            {categories.map((c) => (
+              <p key={c._id}>
+                <Link
+                  to={`category/${c.slug}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  {c.name}
+                </Link>
+              </p>
+            ))}
           </div>
           <div className="col-md-6 col-lg-4 col-xl-2 mx-auto mt-3">
             <h5 className="text-uppercase mb-4 fw-bold">Custom Services</h5>
             <p>
-              <Link to="/men" style={{ textDecoration: "none" }}>
-                Interventions and Prices
+              <Link to="#" style={{ textDecoration: "none" }}>
+                Về chúng tôi
               </Link>
             </p>
             <p>
-              <Link to="/men" style={{ textDecoration: "none" }}>
-                Preserve your watch
+              <Link to="#" style={{ textDecoration: "none" }}>
+                Chứng chỉ
               </Link>
             </p>
             <p>
-              <Link to="/men" style={{ textDecoration: "none" }}>
-                Certifcates and extracts
+              <Link to="#" style={{ textDecoration: "none" }}>
+                Quy định trả hàng
               </Link>
             </p>
             <p>
-              <Link to="/men" style={{ textDecoration: "none" }}>
-                Order a Catalogue
+              <Link to="#" style={{ textDecoration: "none" }}>
+                Hỏi và đáp
               </Link>
             </p>
             <p>
-              <Link to="/men" style={{ textDecoration: "none" }}>
-                FAQ
+              <Link to="#" style={{ textDecoration: "none" }}>
+                Cách nuôi trồng sen đá, xương rồng
               </Link>
             </p>
           </div>
@@ -77,7 +89,7 @@ export default function Footer() {
             <h5 className="text-uppercase mb-4 fw-bold">Contact</h5>
             <p>
               <FontAwesomeIcon icon={faHome} className="me-1" />
-              Ho Chi Minh, Viet Namy
+              Gò Vấp, Hồ Chí Minh
             </p>
             <p>
               <FontAwesomeIcon icon={faEnvelope} className="me-2" />

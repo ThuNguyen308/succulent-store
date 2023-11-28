@@ -38,7 +38,7 @@ export default function Cart() {
           {user?._is ?? <h3>Current Address: {user?.address}</h3>}
           <h3>Total: {format.formatPrice(total)}</h3>
           <hr className="divider" />
-          {Object.keys(user).length !== 0 ? (
+          {user?._id ? (
             <button
               className="btn bg-primary text-white"
               onClick={() => navigate("/user/checkout")}
