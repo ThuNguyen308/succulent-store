@@ -10,14 +10,23 @@ import "react-toastify/dist/ReactToastify.css";
 import store from "./redux/store";
 import { SearchProvider } from "./context/search";
 import ErrorBoundary from "./components/ErrorBoudary/ErrorBoundary";
+import { ConfigProvider } from "antd";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ErrorBoundary>
     <Provider store={store}>
-      <SearchProvider>
-        <App />
-      </SearchProvider>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#407e6f",
+          },
+        }}
+      >
+        <SearchProvider>
+          <App />
+        </SearchProvider>
+      </ConfigProvider>
     </Provider>
   </ErrorBoundary>
 );
