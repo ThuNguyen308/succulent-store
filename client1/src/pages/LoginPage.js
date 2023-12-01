@@ -121,6 +121,10 @@ export default function Login() {
         ) : null}
         Submit
       </button>
+      <p style={{ fontStyle: "italic", color: "green" }}>
+        Nếu bạn muốn đăng nhập với vai trò admin: <br />
+        <b>Email:</b> admin@gmail.com, <b>Password:</b> 123456
+      </p>
     </form>
   );
 }

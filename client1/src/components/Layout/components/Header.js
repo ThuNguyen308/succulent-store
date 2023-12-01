@@ -112,8 +112,11 @@ export default function Header() {
                       process.env.REACT_APP_API +
                       `api/v1/auth/get-avatar/${user._id}`
                     }
-                    width="50px"
-                    height="50px"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                    }}
                   />
                   <span className="user-name">{user?.name}</span>
                   <FontAwesomeIcon
