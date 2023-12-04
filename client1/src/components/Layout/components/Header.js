@@ -10,6 +10,8 @@ import {
   faCaretDown,
   faBars,
   faMagnifyingGlass,
+  faClipboard,
+  faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { Badge } from "antd";
 
@@ -134,11 +136,13 @@ export default function Header() {
                     <li>
                       <Link to="/user/profile" className="dropdown1-item-link">
                         Profile
+                        <FontAwesomeIcon icon={faUser} />
                       </Link>
                     </li>
                     <li>
                       <Link to="/user/orders" className="dropdown1-item-link">
                         Orders
+                        <FontAwesomeIcon icon={faClipboard} />
                       </Link>
                     </li>
                     <li>
@@ -150,6 +154,7 @@ export default function Header() {
                         className="dropdown1-item-link"
                       >
                         Log out
+                        <FontAwesomeIcon icon={faRightFromBracket} />
                       </button>
                     </li>
                   </>
@@ -230,65 +235,6 @@ export default function Header() {
           </li>
         </ul>
       </nav>
-
-      {/* <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        {
-                            user?.role === 1 && (
-                                <li className="nav-item">
-                                    <NavLink to="/admin" className="nav-link" aria-current="page">Admin</NavLink>
-                                </li>
-                            )
-                        }
-                        <li className="nav-item">
-                            <NavLink to="/" className="nav-link active" aria-current="page">Home</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to="/categories" className="nav-link">Category</NavLink>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <Link className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {Object.keys(user).length !== 0
-                                    ? <>
-                                        {user?.name}
-                                    </>
-                                    : <FontAwesomeIcon icon={faUser} />
-                                }
-                            </Link>
-                            <ul className="dropdown-menu dropdown-menu-end">
-                                {Object.keys(user).length !== 0
-                                    ? <>
-                                        <li>
-                                        <Link to="/user/profile" className="dropdown-item">Profile</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/user/orders" className="dropdown-item">Orders</Link>
-                                        </li>
-                                        <li><hr className="dropdown1-divider"/></li>
-                                        <li>
-                                            <button onClick={() => handleLogout()} className="dropdown-item">Log out</button>
-                                        </li>
-                                    </>
-                                    : <>
-                                        <li>
-                                            <Link to="/register" className="dropdown-item">Register</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/login" className="dropdown-item">Log in</Link>
-                                        </li>
-                                    </>
-                                }
-                            </ul>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to="/cart" className="nav-link">
-                                <Badge count={items.length} size="small" offset={[3, -4]}>
-                                    <FontAwesomeIcon icon={faCartShopping}/>
-                                </Badge>
-                            </NavLink>
-                        </li>
-                    </ul>
-                </div> */}
     </header>
   );
 }

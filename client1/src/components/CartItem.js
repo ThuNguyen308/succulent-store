@@ -2,23 +2,11 @@ import React, { useEffect, useState } from "react";
 import format from "../helpers/format";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, updateQuantity } from "../redux/actions/cart";
+import QuantityControl from "./QuantityControl";
 
 export default function CartItem({ item }) {
   const dispatch = useDispatch();
   const [value, setValue] = useState(item.buyQuantity);
-
-  const handleDecrease = () => {
-    if (value > 1) {
-      setValue(value - 1);
-    }
-  };
-
-  const handleIncrease = () => {
-    //check <= availible quantity in warehouse
-    if (value < item.quantity) {
-      setValue(value + 1);
-    }
-  };
 
   useEffect(() => {
     dispatch(updateQuantity({ _id: item._id, buyQuantity: value }));
@@ -47,31 +35,11 @@ export default function CartItem({ item }) {
       </td>
 
       <td>
-        <div
-          className="d-inline-flex rounded align-items-center border"
-          style={{ height: "40px", overflow: "hidden" }}
-        >
-          <div
-            className="btn"
-            style={{ backgroundColor: "#ddd" }}
-            onClick={() => handleDecrease()}
-          >
-            -
-          </div>
-          <input
-            type="number"
-            value={value}
-            readOnly
-            style={{ width: "40px", textAlign: "center" }}
-          />
-          <div
-            className="btn"
-            style={{ backgroundColor: "#ddd" }}
-            onClick={() => handleIncrease()}
-          >
-            +
-          </div>
-        </div>
+        <QuantityControl
+          value={value}
+          setValue={setValue}
+          maxValue={item?.quantity}
+        />
       </td>
 
       <td>

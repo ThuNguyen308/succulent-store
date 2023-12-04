@@ -134,7 +134,7 @@
             position: absolute;
             right: 0;
             top: calc(100% + 10px);
-            min-width: 100px;
+            min-width: 120px;
             border-radius: 4px;
             background-color: #fff;
             box-shadow: 1px 1px 4px #ccc;
@@ -165,7 +165,8 @@
         }
 
         .dropdown1-item-link {
-            display: block;
+            display: flex;
+            justify-content: space-between;
             width: 100%;
             padding: 4px 8px
         }

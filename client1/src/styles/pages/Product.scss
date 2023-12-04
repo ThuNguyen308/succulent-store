@@ -1,0 +1,12 @@
+.detail-item {
+    display: flex;
+
+    .title {
+        flex: 0 0 20%;
+        font-weight: bold;
+    }
+
+    .content {
+        flex: 1
+    }
+}
