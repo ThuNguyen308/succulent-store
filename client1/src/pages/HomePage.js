@@ -73,7 +73,7 @@ export default function HomePage() {
   return (
     <div>
       <Banner />
-      <div className="row">
+      <div className="row" style={{ marginTop: "30px" }}>
         <div className="col-md-3">
           <div className="d-flex flex-column mb-3">
             <h3>Category</h3>

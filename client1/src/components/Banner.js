@@ -7,29 +7,27 @@ import slide2mb from "./../assets/images/banner/slide2_mb.jpg";
 
 export default function Banner() {
   return (
-    <div className="banner-container">
-      <Carousel autoplay>
-        <div className="bannerItem">
-          <picture>
-            <source media="(max-width: 767px)" srcSet={slide1mb} />
-            <img
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              src={slide1}
-              alt="s1"
-            />
-          </picture>
-        </div>
-        <div className="bannerItem">
-          <picture>
-            <source media="(max-width: 767px)" srcSet={slide2mb} />
-            <img
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              src={slide2}
-              alt="s2"
-            />
-          </picture>
-        </div>
-      </Carousel>
-    </div>
+    <Carousel autoplay>
+      <div className="bannerItem">
+        <picture style={{ width: "100%", height: "100%", objectFit: "cover" }}>
+          <source media="(max-width: 767px)" srcSet={slide1mb} />
+          <img
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            src={slide1}
+            alt="s1"
+          />
+        </picture>
+      </div>
+      <div className="bannerItem">
+        <picture>
+          <source media="(max-width: 767px)" srcSet={slide2mb} />
+          <img
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            src={slide2}
+            alt="s2"
+          />
+        </picture>
+      </div>
+    </Carousel>
   );
 }
